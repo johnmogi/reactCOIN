@@ -1,11 +1,9 @@
 export default function Footer(){
-    function getDate(){
-        
-        return new Date().getFullYear
-    }
+
+    const getCurrentYear = () => new Date().getUTCFullYear();
     return (
-        <div>
-              {getDate }
+        <div className="center">
+         all rights reserved John Mogi &copy; {getCurrentYear()}
         </div>
     )
 }

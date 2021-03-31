@@ -9,6 +9,8 @@ export default function HeaderTheme(){
                 <NavLink to="/coins" activeClassName="active-route" exact>Coins</NavLink>
                 <NavLink to="/live" activeClassName="active-route" exact>Live</NavLink>
             </div>
+
+            
 </div>
     )
 }
