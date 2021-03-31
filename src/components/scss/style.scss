@@ -1,0 +1,20 @@
+$red: red;
+$center: 0 20%;
+$border: 1px solid black;
+.header{
+
+    display:flex;
+    .title{
+        font-size:x-large;
+        margin-right: 5px;
+    }
+}
+.menu{
+    a{
+        margin-left: 15px;
+        line-height: 2.3em;
+    }
+}
+.main{
+    min-height: 80vh;
+}
