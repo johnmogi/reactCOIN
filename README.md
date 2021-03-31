@@ -1,71 +1,81 @@
-# Getting Started with Create React App
+## revisiting an old project but making some changes:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+no db - local storage // nosql // graphql
 
-In the project directory, you can run:
+react app - SPA
 
-### `npm start`
+0. tallywind - don't do : npm install tailwindcss: 
+https://tailwindcss.com/docs/guides/create-react-app
+npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat @tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+npm install @craco/craco
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+further extend into react:
+https://emortlock.github.io/tailwind-react-ui/#installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+api to coins and process.
+https://www.coinapi.io/
+https://docs.coinapi.io/#output-data-format
 
-### `npm test`
+26ED6E1D-71CD-4789-9181-60AAA7A8C626
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+http://rest-sandbox.coinapi.io/v1/exchanges
+X-CoinAPI-Key
 
-### `npm run build`
+expand details // search for coin // add to liked
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+0. npx create-react-app webcoin 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+0. browser router:
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+  <BrowserRouter>
+    <Switch>
+                            <Route path="/home" component={Home} exact />
+                            <Route path="/products" component={Products} exact />
+                            <Route path="/products/new" component={Insert} exact />
+                            <Route path="/products/:prodID" component={Details} exact />
+                            <Route path="/about" component={About} exact />
+                            <Redirect from="/" to="/home" exact />
+                            <Route component={PageNotFound} />
+                        </Switch>
+                        import { NavLink } from "react-router-dom";
+      <div className="menu">
+                <NavLink to="/home" activeClassName="active-route" exact>Home</NavLink>
+                <NavLink to="/products" activeClassName="active-route" exact>Products</NavLink>
+                <NavLink to="/about" activeClassName="active-route" exact>About</NavLink>
+            </div>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+0. simple function:
+    const getCurrentYear = () => new Date().getUTCFullYear();
+{getCurrentYear()}
 
-### `npm run eject`
+0. // hook into fetch: // https://rapidapi.com/blog/react-hooks-fetch-data-api/
+npm install --save axios 
+import axios from 'axios'
+ let [responseData, setResponseData] = React.useState(''); 
+  React.useEffect(() => {
+    setResponseData('hello')
+    console.log(responseData)
+  }, [setResponseData, responseData])
+  .env
+REACT_APP_API_KEY=yourapikey
+// this works but not quite: (it does not store the state correctly)
+React.useEffect(() => {
+    axios({
+        "method": "GET",
+        "url": "http://rest-sandbox.coinapi.io/v1/exchanges",
+        "headers": {
+        'X-CoinAPI-Key': '26ED6E1D-71CD-4789-9181-60AAA7A8C626'
+        }
+      })
+      .then((response) => {
+        console.log(response.data)
+        state.push(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+}, [])
+// this should work - test it without auth at first:
+https://blog.logrocket.com/patterns-for-data-fetching-in-react-981ced7e5c56/
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# reactCOIN
